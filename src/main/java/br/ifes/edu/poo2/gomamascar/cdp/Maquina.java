@@ -35,4 +35,8 @@ public class Maquina {
     public void SetState(MaquinaState state){
         this.state = state;
     }
+    
+    public MaquinaState getState(){
+        return state;
+    }
 }

@@ -5,10 +5,7 @@
  */
 package br.ifes.edu.poo2.gomamascar.cdp;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -23,6 +20,11 @@ public class MaquinaTest {
     public void before(){
         maquina = new Maquina();
     }
+    
+    @Test
+    public void testFirstInstance(){
+        assertEquals(SemMoeda.class, maquina.getState().getClass());
+    }
 
     /**
      * Test of InserirMoeda method, of class Maquina.
@@ -30,11 +32,9 @@ public class MaquinaTest {
     @Test
     public void testInserirMoeda() {
         System.out.println("InserirMoeda");
-        int moeda = 0;
-        Maquina instance = new Maquina();
-        instance.InserirMoeda(moeda);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int moeda = 1;
+        maquina.InserirMoeda(moeda);
+        assertEquals(RecebeMoeda.class, maquina.getState().getClass());
     }
 
     /**
@@ -43,10 +43,20 @@ public class MaquinaTest {
     @Test
     public void testEjetarMoeda() {
         System.out.println("EjetarMoeda");
-        Maquina instance = new Maquina();
-        instance.EjetarMoeda();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        maquina.EjetarMoeda();
+        assertEquals(SemMoeda.class, maquina.getState().getClass());
+    }
+    
+    /**
+     * Test of AcionarAlavanca method, of class Maquina.
+     */
+    @Test
+    public void testAcionarAlavanca() {
+        System.out.println("AcionarAlavanca");
+        int moeda = 1;
+        maquina.InserirMoeda(moeda);
+        maquina.AcionarAlavanca();
+        assertEquals(GomaVendida.class, maquina.getState().getClass());
     }
 
     /**
@@ -54,24 +64,10 @@ public class MaquinaTest {
      */
     @Test
     public void testRetirarGoma() {
-        System.out.println("RetirarGoma");
-        Maquina instance = new Maquina();
-        instance.RetirarGoma();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of AcionarAlavanca method, of class Maquina.
-     */
-    @Test
-    public void testAcionarAlavanca() {
-        System.out.println("AcionarAlavanca");
-        Maquina instance = new Maquina();
-        instance.AcionarAlavanca();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        System.out.println("RetirarGoma");        
+        maquina.RetirarGoma();
+        assertEquals(SemMoeda.class, maquina.getState().getClass());
+    }    
 
     /**
      * Test of SetState method, of class Maquina.
@@ -80,10 +76,7 @@ public class MaquinaTest {
     public void testSetState() {
         System.out.println("SetState");
         MaquinaState state = null;
-        Maquina instance = new Maquina();
-        instance.SetState(state);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        maquina.SetState(state);
     }
     
 }
